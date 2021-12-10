@@ -39,9 +39,22 @@ public class Profesor extends Persona{
 		estudiante.asignarNota(asignatura, nota);
 	}
 	
+	public void evaluarAsignatura(Asignatura asignatura) {
+		Set<Estudiante> estudiantes = asignatura.getAlumnos();
+		for (Estudiante e : estudiantes) {
+			this.evaluarEstudiante(asignatura, e);
+		}
+	}
+	
+	public void evaluarTodasAsignaturas() {
+		for (Asignatura a : this.asignaturas) {
+			this.evaluarAsignatura(a);
+		}
+	}
+	
 	@Override
 	public void imprimirInformacion() {
-		System.out.println(getNombre() + " " + getApellidos() + " - " + getDespacho());
+		System.out.println("Profesor: " + getNombre() + " " + getApellidos() + " - Despacho: " + getDespacho());
 	}
 	
 	

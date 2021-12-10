@@ -47,7 +47,10 @@ public class Persona {
 	}
 	
 	public void imprimirInformacion() {
-		System.out.println(getNombre() + " " + getApellidos());
+		System.out.println("Persona: " + getNombre() + " " + getApellidos());
 	}
 	
+	public void evacuarEdificio(SalidasEmergencia salida) {
+		System.out.println(this.nombre + " " + this.apellidos + " ha evacuado el edificio por la salida " + salida);
+	}
 }
