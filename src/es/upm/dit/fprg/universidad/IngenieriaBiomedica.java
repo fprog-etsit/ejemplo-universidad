@@ -1,6 +1,9 @@
 package es.upm.dit.fprg.universidad;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.HashSet;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public class IngenieriaBiomedica implements CarreraUniversitaria {
@@ -65,6 +68,29 @@ public class IngenieriaBiomedica implements CarreraUniversitaria {
 		personas.addAll(this.estudiantes);
 		personas.addAll(this.profesores);
 		return personas;
+	}
+	
+	public void escribeEstudiantes(String nombreFichero) throws Exception {
+		File fichero = new File(nombreFichero);
+		
+		if (!fichero.getParentFile().exists()) {
+			fichero.getParentFile().mkdirs();
+		}
+		
+		PrintWriter writer = new PrintWriter(fichero);
+		writer.println("Nombre,Apellidos,DNI,Notas");
+		for (Estudiante e : this.estudiantes) {
+			String nombre = e.getNombre();
+			String apellidos = e.getApellidos();
+			String dni = e.getDni();
+			String notas = "";
+			for (Entry<Asignatura,Double> nota : e.getNotas().entrySet()) {
+				notas += nota.getKey().getNombre()+":"+nota.getValue()+"/";
+			}
+			writer.println(nombre+","+apellidos+","+dni+","+notas);
+		}
+		writer.close();
+		
 	}
 	
 	
